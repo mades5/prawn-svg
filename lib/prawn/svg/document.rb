@@ -78,4 +78,8 @@ class Prawn::Svg::Document
       value.to_f
     end
   end
+  
+  def markers
+    @options[:markers]
+  end
 end

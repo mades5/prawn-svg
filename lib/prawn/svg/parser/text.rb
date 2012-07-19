@@ -35,6 +35,14 @@ class Prawn::Svg::Parser::Text
     element.element.children.each do |child|
       if child.node_type == :text
         text = child.to_s.strip.gsub(/\s+/, " ")
+        
+        text.gsub!("&amp;", "&")
+        
+        unless element.document.markers.nil?
+          element.document.markers.each do |key, value|
+            text.gsub!("####{key.to_s.upcase}###", value)
+          end
+        end
 
         while text != "" 
           opts[:at] = [x_positions.first, y_positions.first]

@@ -13,6 +13,12 @@ Using prawn-svg:
 :at must be specified.  :width, :height, or neither may be specified; if neither is present,
 the resolution specified in the SVG will be used.
 
+My version adds marker support. You can create a SVG in your editor and place markers like ###MARKER## in your text and tspan tags. Replacing markers is easy:
+
+Prawn::Document.generate("svg.pdf") do
+  svg svg_data, :at => [x, y], :markers => {:marker => "Your text"}
+end
+
 prawn-svg is in its infancy and does not support the full SVG specifications.  It currently supports:
 
 - line tag

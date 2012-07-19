@@ -126,8 +126,17 @@ class Prawn::Svg::Element
     end
     if (family = @attributes['font-family']) && family.strip != ""
       font_updated = true
+      pieces =  family.gsub(/'/, '').split('-')
+      if pieces[-1].downcase == 'bold'
+        family = pieces[0]
+        @state[:font_style] = :bold
+      elsif pieces[-1].downcase == 'italic'
+        family = pieces[0]
+        @state[:font_style] = :italic
+      end
       @state[:font_family] = family
     end
+    #p '*'*100 + @state[:font_family].inspect
     
     if @state[:font_family] && font_updated
       if pdf_font = Prawn::Svg::Font.map_font_family_to_pdf_font(@state[:font_family], @state[:font_style])
